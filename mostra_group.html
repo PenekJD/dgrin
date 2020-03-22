@@ -1,5 +1,17 @@
 <%
-	try { Render_Type = Request.Query.render_type+""; } catch(no) { Render_Type=""; }
+/*
+	Разработано для WebTutor
+	тестовое задание для Мостра-групп
+	ИС Гринчик Д.А.
+	2020 год
+ */
+ 	/* ПУБЛИЧНЫЕ ПЕРЕМЕННЫЕ */
+ 	aMainAjaxLink = "/dgrin/mostra_group.html";
+ 	aMostraGroupColor_main = "#3C4D5A";
+ 	aMostraGroupColor_secondary = "#F76F01";
+
+/* Определение типа рендера страницы, чтобы подгрузить определенный участок кода */
+try { Render_Type = Request.Query.render_type+""; } catch(no) { Render_Type=""; }
 
 /*	Рендер главного фрейма	*/
 if (Render_Type=="") {
@@ -13,24 +25,124 @@ if (Render_Type=="") {
     <title>DGrinchik project</title>
     <link rel="stylesheet" href="mostra_group_style.css">
     <style>
-		.LOGO_IMG_MAIN {  width:40%;  }
+		@font-face {  font-family: Mostra; src: url(src/18644.ttf); }
+		@font-face {  font-family: Mostra_Light; src: url(src/19219.ttf); }
 
+		body { margin:0px; padding:0px; }
+
+	/* BLOCKS */
+		#MG_MAIN_CONTAINER { position:relative; z-index: 0; }
+		#MG_LOADING_SCREEN span { font-family: Mostra; color:<%=aMostraGroupColor_main%>; font-size:20px; }
+		.HEAD_TITLE_LINE { text-align: left; box-shadow:0 0 10px rgba(0,0,0,0.5); }
+
+		.HELP_DESK { display:none; font-family: Mostra_Light; color:<%=aMostraGroupColor_main%>; padding:50px; }
+		.HELP_DESK div { padding:20px; border-radius: 10px; background:<%=aMostraGroupColor_main%>; color:#fff; }
+			.HELP_DESK.PC { display:block; }
+			.HELP_DESK.MOBILE { display:none; }
+
+		/* Menu */
+		.Mob_MENU_BTN { display:none; width:60px; height:60px; font-size:40px; color:<%=aMostraGroupColor_main%>;  }
+
+	/* IMGS */
+		.LOGO_IMG_MAIN {  width:40%;  }
+		.LOGO_LITTLE { width:200px; }
+		.LOGO_LITTLE_MOB { display:none; height:60px; }
+
+	/* Mobile */
 		@media (max-width: 900px) {
 			.LOGO_IMG_MAIN {width:80%;}
+			#MG_LOADING_SCREEN span { font-size:18pt; }
+			.HEAD_TITLE_LINE { text-align: center; height:60px; }
+
+			.LOGO_LITTLE { display:none; }
+			.LOGO_LITTLE_MOB { display:inline-block; }
+
+			/* Menu */
+			.Mob_MENU_BTN { display:inline-block; float:left; }
+			.Mob_MENU_BTN:active { background-color:<%=aMostraGroupColor_secondary%>; color:#fff; }
+
+			.HELP_DESK.PC { display:none; }
+			.HELP_DESK.MOBILE { display:block; }
 		}
     </style>
 </head>
 <body>    
-	<div id="MG_LOADING_SCREEN" style="position:fixed; top:0px; left:0px; width:100%; height:100%;">
-		<table style="position:absolute; top:0px; left:0px; width:100%; height:100%; border-collapse:collapse;"><tr><td style="vertical-align: middle; text-align: center; width:100%; height:100%;">
-		<img class="LOGO_IMG_MAIN" src="src/main_logo_mg.png" style=""/>
-	</td></tr></table>
+<div id="MG_LOADING_SCREEN" style="position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:10; background:#fff;">
+	<table style="position:absolute; top:0px; left:0px; width:100%; height:100%; border-collapse:collapse;"><tr><td style="vertical-align: middle; text-align: center; width:100%; height:100%;">
+	<img class="LOGO_IMG_MAIN" src="src/main_logo_mg.png" style=" margin:20px;"/><br>
+	<span>ЗАГРУЗКА...</span>
+</td></tr></table>
+</div>
+<%
+	aHELLOWORD_FromGrinchik = "Доброго времени суток! :)<br><br>Предоставляю Вашему вниманию простое Single-Page-приложение для сохранения информации в Базу Данных WebTutor.";
+%>
+	<div id="MG_MAIN_CONTAINER">
+		<div class="HEAD_TITLE_LINE">
+			<img class="LOGO_LITTLE" src="src/main_logo_mg.png"/>
+			<img class="LOGO_LITTLE_MOB" src="src/main_logo_mg.png"/">
+			<div class="Mob_MENU_BTN">&#9776;</div>
+		</div>
+		<div class="CONTENT_LINE">
+			<div id="INJECT_CONTAINER">
+				<div class="HELP_DESK PC" style="" align="center">
+					<div>
+						<%=aHELLOWORD_FromGrinchik%>
+						<br><br><br>
+						Чтобы приступить к работе выберите необходимый Вам пункт меню в верхней части страницы.
+					</div>
+				</div>
+				<div class="HELP_DESK MOBILE" style="" align="center">
+					<div>
+						<%=aHELLOWORD_FromGrinchik%>
+						<br><br><br>
+						Чтобы приступить к работе выберите необходимый Вам пункт меню.<br><br>
+						Для этого нажмите на пиктограмму &#9776; в верхнем левом углу.
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-<!-- <script src="https://penekjd.github.io/src/mostra_g.js"></script> -->
+
+	<!-- <script src="https://penekjd.github.io/src/mostra_g.js"></script> -->
+	<script>	/* onclick="_OpenFrameByAJAX_('INJECT_CONTAINER', 'AJAX_1', true);	*/
+		window.onload = function() {
+			var _MAIN_LOAD_FRAME_ = document.getElementById("MG_LOADING_SCREEN");
+			$(_MAIN_LOAD_FRAME_).fadeOut(300);
+		}
+
+		function _OpenFrameByAJAX_(inject_div_id, render_type, current_link) {
+			var _CURRENT_URL_ = "<%=aMainAjaxLink%>";
+			if (current_link) {
+				var _CURRENT_URL_ = window.location.href;
+			}
+			var INJECT_DIV = document.getElementById(inject_div_id);
+			var SEND_OBJ = {};
+				SEND_OBJ.render_type = render_type;
+			$.ajax({
+				url: _CURRENT_URL_,
+				data: SEND_OBJ,
+				type: 'post',
+				success: function(response) {
+					$(INJECT_DIV).html(response);
+				}
+			});
+		}
+	</script>
 </body>
 </html>
 <%
 }
+
+
+
+/* Рендер первого АЯКС-запроса */
+if (Render_Type=="AJAX_1") {
+%>
+HI
+<%
+}
+
+
 
 
 %>
