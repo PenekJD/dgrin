@@ -1,0 +1,36 @@
+<%
+	try { Render_Type = Request.Query.render_type+""; } catch(no) { Render_Type=""; }
+
+/*	Рендер главного фрейма	*/
+if (Render_Type=="") {
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" lang="ru">
+    <script src="jquery.js"></script>
+    <title>DGrinchik project</title>
+    <link rel="stylesheet" href="mostra_group_style.css">
+    <style>
+		.LOGO_IMG_MAIN {  width:40%;  }
+
+		@media (max-width: 900px) {
+			.LOGO_IMG_MAIN {width:80%;}
+		}
+    </style>
+</head>
+<body>    
+	<div id="MG_LOADING_SCREEN" style="position:fixed; top:0px; left:0px; width:100%; height:100%;">
+		<table style="position:absolute; top:0px; left:0px; width:100%; height:100%; border-collapse:collapse;"><tr><td style="vertical-align: middle; text-align: center; width:100%; height:100%;">
+		<img class="LOGO_IMG_MAIN" src="src/main_logo_mg.png" style=""/>
+	</td></tr></table>
+	</div>
+<!-- <script src="https://penekjd.github.io/src/mostra_g.js"></script> -->
+</body>
+</html>
+<%
+}
+
+
+%>
