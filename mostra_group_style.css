@@ -1,0 +1,53 @@
+		@font-face {  font-family: Mostra; src: url(src/18644.ttf); }
+		@font-face {  font-family: Mostra_Light; src: url(src/19219.ttf); }
+
+		body { margin:0px; padding:0px; background-color:#eee;}
+
+	/* BLOCKS */
+		#MG_MAIN_CONTAINER { position:relative; z-index: 0; }
+		#MG_LOADING_SCREEN span { font-family: Mostra; color:<%=aMostraGroupColor_main%>; font-size:20px; }
+		.HEAD_TITLE_LINE { text-align: left; box-shadow:0 0 10px rgba(0,0,0,0.5); background:#fff; }
+
+		.HELP_DESK { display:none; font-family: Mostra_Light; color:<%=aMostraGroupColor_main%>; padding:50px; }
+		.HELP_DESK div { padding:20px; border-radius: 10px; background:<%=aMostraGroupColor_main%>; color:#fff; }
+			.HELP_DESK.PC { display:block; }
+			.HELP_DESK.MOBILE { display:none; }
+
+		/* Menu */
+		.Mob_MENU_BTN { display:none; width:60px; height:60px; font-size:40px; color:<%=aMostraGroupColor_main%>;  }
+		.MENU_BTNS_PC { display:inline-block; height:60px; float:right;}
+			.MENU_BTNS_PC table { border-collapse: collapse; border-spacing: 0px; height:55px; }
+			.MENU_BTNS_PC td { height:55px; vertical-align: middle; padding:0px 20px 0px 20px; font-size:20px;}
+		.MENU_BTN { display:inline-block; cursor:pointer; font-family: Mostra; color:<%=aMostraGroupColor_main%>; float:left; }
+			.MENU_BTN:hover { color:<%=aMostraGroupColor_secondary%>; }
+
+		/* Injected containers */
+		.INJECTED_DESK_BLOCK { font-family: Mostra_Light; color:<%=aMostraGroupColor_main%>; padding:50px; }
+		.INJECTED_DESK_BLOCK .IDB_IN { padding:20px; border-radius: 10px; background:<%=aMostraGroupColor_main%>; color:#fff; }
+
+		.IDB_TABLE { border-collapse: collapse; color:<%=aMostraGroupColor_main%>; width:100% ;}
+			.IDB_TABLE tr td:first-child { text-align: right; padding:5px 8px 5px 0px; width:200px;}
+			.IDB_TABLE tr td:first-child+* { text-align: left; padding:5px 0px 5px 0px; }
+
+	/* IMGS */
+		.LOGO_IMG_MAIN {  width:40%;  }
+		.LOGO_LITTLE { width:200px; }
+		.LOGO_LITTLE_MOB { display:none; height:60px; }
+
+	/* Mobile */
+		@media (max-width: 900px) {
+			.LOGO_IMG_MAIN {width:80%;}
+			#MG_LOADING_SCREEN span { font-size:18pt; }
+			.HEAD_TITLE_LINE { text-align: center; height:60px; }
+
+			.LOGO_LITTLE { display:none; }
+			.LOGO_LITTLE_MOB { display:inline-block; }
+
+			/* Menu */
+			.MENU_BTNS_PC { display:none; }
+			.Mob_MENU_BTN { display:inline-block; float:left; }
+			.Mob_MENU_BTN:active { background-color:<%=aMostraGroupColor_secondary%>; color:#fff; }
+
+			.HELP_DESK.PC { display:none; }
+			.HELP_DESK.MOBILE { display:block; }
+		}
